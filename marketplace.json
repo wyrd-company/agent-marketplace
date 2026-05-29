@@ -1,0 +1,8 @@
+{
+  "name": "wyrd-company",
+  "interface": {
+    "displayName": "Wyrd Company"
+  },
+  "plugins": [
+  ]
+}
