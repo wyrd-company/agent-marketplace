@@ -4,7 +4,6 @@
     "name": "Wyrd Company"
   },
   "description": "Wyrd Company Claude Code plugins.",
-  "version": "0.1.0",
   "plugins": [
   ]
 }
