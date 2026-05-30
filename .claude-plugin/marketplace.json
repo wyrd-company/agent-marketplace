@@ -5,5 +5,13 @@
   },
   "description": "Wyrd Company Claude Code plugins.",
   "plugins": [
+    {
+      "name": "async-codex-mcp",
+      "source": {
+        "source": "npm",
+        "package": "@wyrd-company/async-codex-mcp"
+      },
+      "description": "Codex MCP Server async proxy"
+    }
   ]
 }
