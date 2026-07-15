@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "async_claude": {
+      "command": "npx",
+      "args": [
+        "--yes",
+        "--@wyrd-company:registry=https://registry.npmjs.org",
+        "@wyrd-company/async-claude-agentsdk-mcp@0.1.0"
+      ]
+    }
+  }
+}

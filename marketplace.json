@@ -4,5 +4,17 @@
     "displayName": "Wyrd Company"
   },
   "plugins": [
+    {
+      "name": "async-claude-agentsdk-mcp",
+      "source": {
+        "source": "local",
+        "path": "./plugins/async-claude-agentsdk-mcp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
   ]
 }

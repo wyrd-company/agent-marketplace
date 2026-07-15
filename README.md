@@ -12,7 +12,7 @@ codex plugin marketplace add wyrd-company/agent-marketplace
 
 ### Plugins
 
-- None
+- [async-claude-agentsdk-mcp](https://github.com/wyrd-company/async-claude-agentsdk-mcp): run Claude Agent SDK sessions as asynchronous Codex sub-agents with status, todo, and continuation tools.
 
 ## Claude Marketplace
 

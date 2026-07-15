@@ -1,0 +1,35 @@
+{
+  "name": "async-claude-agentsdk-mcp",
+  "version": "0.1.0",
+  "description": "Run Claude Agent SDK sessions as asynchronous Codex sub-agents.",
+  "author": {
+    "name": "Wyrd Company",
+    "url": "https://github.com/wyrd-company"
+  },
+  "homepage": "https://github.com/wyrd-company/async-claude-agentsdk-mcp#readme",
+  "repository": "https://github.com/wyrd-company/async-claude-agentsdk-mcp",
+  "license": "MIT",
+  "keywords": [
+    "agent-sdk",
+    "async",
+    "claude",
+    "mcp"
+  ],
+  "interface": {
+    "displayName": "Async Claude Agent SDK",
+    "shortDescription": "Run Claude as an asynchronous Codex sub-agent.",
+    "longDescription": "Start Claude Agent SDK tasks without blocking the Codex turn, inspect their status and todos, and continue completed Claude sessions.",
+    "developerName": "Wyrd Company",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/wyrd-company/async-claude-agentsdk-mcp",
+    "defaultPrompt": [
+      "Delegate this task to Claude.",
+      "Ask Claude to review this implementation."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}
