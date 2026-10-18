@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "t3code-mcp": {
+      "command": "npx",
+      "args": [
+        "--yes",
+        "--@wyrd-company:registry=https://registry.npmjs.org",
+        "@wyrd-company/t3code-mcp@0.1.0"
+      ]
+    }
+  }
+}

@@ -12,6 +12,14 @@
         "package": "@wyrd-company/async-codex-mcp"
       },
       "description": "Codex MCP Server async proxy"
+    },
+    {
+      "name": "t3code-mcp",
+      "source": {
+        "source": "npm",
+        "package": "@wyrd-company/t3code-mcp"
+      },
+      "description": "Dispatch and follow threads on other T3 Code servers"
     }
   ]
 }

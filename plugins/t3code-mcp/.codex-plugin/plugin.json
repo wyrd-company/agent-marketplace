@@ -1,0 +1,35 @@
+{
+  "name": "t3code-mcp",
+  "version": "0.1.0",
+  "description": "Dispatch, message, wait on and read threads on other T3 Code servers.",
+  "author": {
+    "name": "Wyrd Company",
+    "url": "https://github.com/wyrd-company"
+  },
+  "homepage": "https://wyrd.foo/docs/t3code-mcp",
+  "repository": "https://github.com/wyrd-company/t3code-client",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "t3",
+    "t3code",
+    "threads"
+  ],
+  "interface": {
+    "displayName": "T3 Code Servers",
+    "shortDescription": "Run threads on other T3 Code servers.",
+    "longDescription": "Connect to paired T3 Code servers, launch threads with a chosen model and workspace, send them messages, wait for them across servers, answer their questions and read their results.",
+    "developerName": "Wyrd Company",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://wyrd.foo/docs/t3code-mcp",
+    "defaultPrompt": [
+      "List the T3 Code servers you can reach.",
+      "Dispatch this task to a thread on another T3 Code server."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

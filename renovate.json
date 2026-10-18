@@ -2,5 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>wyrd-company/.github:renovate-config"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Pinned npm packages that Codex plugins run through npx",
+      "managerFilePatterns": ["/^plugins/[^/]+/\\.mcp\\.json$/"],
+      "matchStrings": ["\"(?<depName>@wyrd-company/[a-z0-9-]+)@(?<currentValue>\\d+\\.\\d+\\.\\d+)\""],
+      "datasourceTemplate": "npm"
+    }
   ]
 }
