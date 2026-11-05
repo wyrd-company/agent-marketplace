@@ -1,0 +1,13 @@
+{
+  "name": "git-operator",
+  "version": "0.1.0",
+  "description": "Keep each T3 Code thread's git commits attributed to the human operator it works for.",
+  "author": {
+    "name": "Wyrd Company",
+    "url": "https://github.com/wyrd-company"
+  },
+  "homepage": "https://wyrd.foo/tools/git-operator",
+  "repository": "https://github.com/wyrd-company/agent-marketplace",
+  "license": "MIT",
+  "keywords": ["git", "identity", "hooks", "t3code"]
+}
