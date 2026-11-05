@@ -12,6 +12,12 @@
         "package": "@wyrd-company/async-codex-mcp"
       },
       "description": "Codex MCP Server async proxy"
+    },
+    {
+      "name": "git-operator",
+      "source": "./plugins/git-operator",
+      "description": "Keep each T3 Code thread's git commits attributed to the human operator it works for.",
+      "category": "development"
     }
   ]
 }

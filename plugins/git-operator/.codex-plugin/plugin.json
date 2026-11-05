@@ -1,0 +1,23 @@
+{
+  "name": "git-operator",
+  "version": "0.1.0",
+  "description": "Keep each T3 Code thread's git commits attributed to the human operator it works for.",
+  "author": {
+    "name": "Wyrd Company",
+    "url": "https://github.com/wyrd-company"
+  },
+  "homepage": "https://wyrd.foo/tools/git-operator",
+  "repository": "https://github.com/wyrd-company/agent-marketplace",
+  "license": "MIT",
+  "keywords": ["git", "identity", "hooks", "t3code"],
+  "interface": {
+    "displayName": "Git Operator",
+    "shortDescription": "Commit as the human operator registered for this thread.",
+    "longDescription": "At session start, tells the agent which operator this T3 Code thread commits as, or asks it to have the user register one with `git operator set`. Requires the workspace git shim from workspace-dotfiles.",
+    "developerName": "Wyrd Company",
+    "category": "Developer Tools",
+    "capabilities": ["Read"],
+    "websiteURL": "https://wyrd.foo/tools/git-operator"
+  },
+  "hooks": "./hooks/hooks.json"
+}

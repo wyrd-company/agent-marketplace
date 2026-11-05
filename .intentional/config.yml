@@ -1,0 +1,41 @@
+$schema: https://intentional.foo/schemas/config.yml
+contract: contract-2
+settings:
+  internal-dependency-bump: patch
+release-units:
+  # One release unit per plugin whose source lives in this repo. Its version is projected into
+  # every harness manifest, so all harnesses install the same version, and into the wyrd.foo
+  # product entry.
+  git-operator:
+    path: plugins/git-operator
+    projections:
+      - adapter: json
+        file: .claude-plugin/plugin.json
+        pointer: /version
+        mode: committed
+      - adapter: json
+        file: .codex-plugin/plugin.json
+        pointer: /version
+        mode: committed
+      - adapter: yaml
+        file: /docs/user/docs.yml
+        pointer: /products/git-operator/version
+        mode: committed
+    tags:
+      primary:
+        role: primary
+        template: '{id}@{version}'
+  # The public docs release on their own; docs units are tag-only.
+  git-operator-docs:
+    path: docs/user/git-operator
+    depends-on:
+      - git-operator
+    projections:
+      - adapter: yaml
+        file: /docs/user/docs.yml
+        pointer: /products/git-operator/docs-version
+        mode: committed
+    tags:
+      primary:
+        role: primary
+        template: '{id}@{version}'
