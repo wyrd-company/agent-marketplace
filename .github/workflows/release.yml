@@ -1,0 +1,86 @@
+name: Release
+
+# An annotated `<plugin>@X.Y.Z` record, created by `intentional tag`, releases that plugin: it
+# checks that every harness manifest carries the version, and creates the GitHub Release from the
+# plugin's changelog. Harnesses install plugins from the marketplace on main; the Release is the
+# record wyrd.foo reads. Docs records (`<plugin>-docs@X.Y.Z`) have no Release; publish-docs.yml
+# publishes them. Rerunning is safe: an existing Release is left as it is.
+
+on:
+  push:
+    tags:
+      - "*@[0-9]*"
+      - "!*-docs@*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The plugin release record to release, for example git-operator@0.1.0
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - name: Checkout the release record
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: refs/tags/${{ env.RELEASE_TAG }}
+          persist-credentials: false
+
+      - name: Check the record
+        id: record
+        run: |
+          case "$RELEASE_TAG" in
+            *-docs@*|*@*@*|@*|*@) echo "::error::$RELEASE_TAG is not a plugin release record"; exit 1 ;;
+          esac
+          unit="${RELEASE_TAG%@*}"
+          version="${RELEASE_TAG#*@}"
+          git fetch --no-tags origin "+refs/tags/$RELEASE_TAG:refs/tags/$RELEASE_TAG"
+          if [ "$(git cat-file -t "refs/tags/$RELEASE_TAG")" != tag ]; then
+            echo "::error::$RELEASE_TAG is not an annotated tag; create it with intentional tag"
+            exit 1
+          fi
+          if [ ! -d "plugins/$unit" ]; then
+            echo "::error::plugins/$unit does not exist"
+            exit 1
+          fi
+          for manifest in "plugins/$unit"/.claude-plugin/plugin.json "plugins/$unit"/.codex-plugin/plugin.json; do
+            [ -f "$manifest" ] || continue
+            found="$(jq -r .version "$manifest")"
+            if [ "$found" != "$version" ]; then
+              echo "::error::$manifest has version $found, not $version"
+              exit 1
+            fi
+          done
+          python3 scripts/check-plugins.py
+          {
+            echo "unit=$unit"
+            echo "version=$version"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          UNIT: ${{ steps.record.outputs.unit }}
+          VERSION: ${{ steps.record.outputs.version }}
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "The Release for $RELEASE_TAG exists."
+            exit 0
+          fi
+          notes="$RUNNER_TEMP/release-notes.md"
+          scripts/release/extract-release-notes.sh "$VERSION" "plugins/$UNIT/CHANGELOG.md" "$notes"
+          gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --verify-tag \
+            --title "$UNIT $VERSION" --notes-file "$notes"

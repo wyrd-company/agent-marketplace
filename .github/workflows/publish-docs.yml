@@ -1,0 +1,57 @@
+name: Publish docs
+
+# Publishes the plugins' wyrd.foo product entries (docs/user/) through the reusable workflow:
+# after a plugin's Release workflow succeeds, on a push of a `<plugin>-docs@*` docs record, and on
+# a manual run. A plain push to main does not publish.
+
+on:
+  workflow_run:
+    workflows: [ Release ]
+    types: [ completed ]
+  push:
+    tags:
+      - "*-docs@*"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Tag or commit to publish
+        required: true
+        type: string
+      feature:
+        description: Feature a product on the front page
+        type: boolean
+        default: false
+      feature-product:
+        description: The product key to feature
+        type: string
+        default: ""
+      feature-days:
+        description: How long the feature lasts, in days
+        type: string
+        default: "14"
+      feature-reason:
+        description: For example "New plugin"; default "New release"
+        type: string
+        default: ""
+
+permissions: {}
+
+jobs:
+  publish:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository)
+    permissions:
+      contents: read
+    uses: wyrd-company/wyrd.foo/.github/workflows/publish-docs.yml@v2
+    with:
+      ref: ${{ inputs.ref || github.event.workflow_run.head_branch || github.ref_name }}
+      feature: ${{ inputs.feature || false }}
+      feature-product: ${{ inputs.feature-product || '' }}
+      feature-days: ${{ inputs.feature-days || '14' }}
+      feature-reason: ${{ inputs.feature-reason || '' }}
+    secrets:
+      WYRD_TOOLS_DOCS_PUBLISHER_APP_ID: ${{ secrets.WYRD_TOOLS_DOCS_PUBLISHER_APP_ID }}
+      WYRD_TOOLS_DOCS_PUBLISHER_PRIVATE_KEY: ${{ secrets.WYRD_TOOLS_DOCS_PUBLISHER_PRIVATE_KEY }}

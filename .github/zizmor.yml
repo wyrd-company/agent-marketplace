@@ -1,0 +1,12 @@
+rules:
+  # wyrd.foo's publishing contract (docs/technical-designs/publishing.yml, calling-workflow) has
+  # tool repos call its reusable workflow at the moving major tag, so publishing changes reach every
+  # repo without edits, and trigger it on the Release workflow completing. The job's `if:` accepts a
+  # workflow_run only when it succeeded, came from a push and ran in this repo.
+  unpinned-uses:
+    config:
+      policies:
+        "wyrd-company/wyrd.foo/*": ref-pin
+  dangerous-triggers:
+    ignore:
+      - publish-docs.yml

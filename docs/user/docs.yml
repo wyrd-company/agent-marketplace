@@ -33,3 +33,7 @@ products:
             command: |-
               codex plugin marketplace add wyrd-company/agent-marketplace
               codex plugin add git-operator@wyrd-company
+        provides:
+          - element: hook
+            name: SessionStart
+            description: Adds the thread's git operator, or the instruction to register one, to the model's context.
