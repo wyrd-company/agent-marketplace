@@ -25,14 +25,18 @@ release-units:
       primary:
         role: primary
         template: '{id}@{version}'
-  # mnemonic's source is upstream; this unit versions the wrapper (the envconsul launch and the
-  # pinned mnemonic package). It has no wyrd.foo entry: it runs only in Wyrd workspaces.
+  # mnemonic's server is upstream; this unit versions the wrapper: the envconsul launch and the
+  # pinned mnemonic package.
   mnemonic:
     path: plugins/mnemonic
     projections:
       - adapter: json
         file: .claude-plugin/plugin.json
         pointer: /version
+        mode: committed
+      - adapter: yaml
+        file: /docs/user/docs.yml
+        pointer: /products/mnemonic/version
         mode: committed
     tags:
       primary:
@@ -47,6 +51,19 @@ release-units:
       - adapter: yaml
         file: /docs/user/docs.yml
         pointer: /products/git-operator/docs-version
+        mode: committed
+    tags:
+      primary:
+        role: primary
+        template: '{id}@{version}'
+  mnemonic-docs:
+    path: docs/user/mnemonic
+    depends-on:
+      - mnemonic
+    projections:
+      - adapter: yaml
+        file: /docs/user/docs.yml
+        pointer: /products/mnemonic/docs-version
         mode: committed
     tags:
       primary:
