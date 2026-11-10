@@ -27,6 +27,7 @@ claude plugin marketplace add wyrd-company/agent-marketplace
 
 - [async-codex-mcp](https://github.com/wyrd-company/async-codex-mcp): [`codex mcp-server`](https://developers.openai.com/codex/guides/agents-sdk) wrapped in async tools with Claude [channels](https://code.claude.com/docs/en/channels-reference) support.
 - [git-operator](plugins/git-operator): keep each T3 Code thread's git commits attributed to the human operator it works for.
+- [mnemonic](plugins/mnemonic): the [mnemonic](https://github.com/danielmarbach/mnemonic) memory MCP server, started under envconsul so its embedding key comes from Vault. Wyrd workspaces also run it in Codex, from system config.
 
 ## Repository layout
 

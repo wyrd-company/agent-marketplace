@@ -18,6 +18,12 @@
       "source": "./plugins/git-operator",
       "description": "Keep each T3 Code thread's git commits attributed to the human operator it works for.",
       "category": "development"
+    },
+    {
+      "name": "mnemonic",
+      "source": "./plugins/mnemonic",
+      "description": "Run the mnemonic memory MCP server, with its embedding key read from Vault at start.",
+      "category": "development"
     }
   ]
 }
