@@ -25,6 +25,19 @@ release-units:
       primary:
         role: primary
         template: '{id}@{version}'
+  # mnemonic's source is upstream; this unit versions the wrapper (the envconsul launch and the
+  # pinned mnemonic package). It has no wyrd.foo entry: it runs only in Wyrd workspaces.
+  mnemonic:
+    path: plugins/mnemonic
+    projections:
+      - adapter: json
+        file: .claude-plugin/plugin.json
+        pointer: /version
+        mode: committed
+    tags:
+      primary:
+        role: primary
+        template: '{id}@{version}'
   # The public docs release on their own; docs units are tag-only.
   git-operator-docs:
     path: docs/user/git-operator
