@@ -39,8 +39,8 @@ products:
             description: Adds the thread's git operator, or the instruction to register one, to the model's context.
   mnemonic:
     name: mnemonic
-    version: 0.0.0
-    docs-version: 0.0.0
+    version: 0.1.0
+    docs-version: 0.1.0
     tagline: The mnemonic memory MCP server, with its embedding key read from Vault at start.
     blurb: >-
       Runs the mnemonic memory server for Claude Code and Codex in Wyrd workspaces. Notes are
