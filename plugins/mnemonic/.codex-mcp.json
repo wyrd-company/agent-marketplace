@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "mnemonic": {
+      "command": "sh",
+      "args": ["./scripts/mnemonic-mcp.sh"],
+      "cwd": ".",
+      "env_vars": ["VAULT_ADDR", "NODE_EXTRA_CA_CERTS", "T3CODE_THREAD_ID", "SSH_AUTH_SOCK", "GIT_OPERATOR", "XDG_STATE_HOME"]
+    }
+  }
+}

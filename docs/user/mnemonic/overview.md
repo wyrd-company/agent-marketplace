@@ -74,8 +74,14 @@ After you change the model or the dimensions, run mnemonic's `sync` tool with `f
 
 ## Codex
 
-A system config can't install a Codex plugin for each user. Wyrd workspaces add the server to
-`/etc/codex/config.toml` instead, running the plugin's script from the marketplace checkout:
+The Codex plugin runs the same script.
+Codex gives an MCP server only `HOME`, `PATH`, `USER` and a few more variables, so the plugin
+forwards the ones that envconsul, the embedding requests and the git shim need: `VAULT_ADDR`,
+`NODE_EXTRA_CA_CERTS`, `T3CODE_THREAD_ID`, `SSH_AUTH_SOCK`, `GIT_OPERATOR` and `XDG_STATE_HOME`.
+
+In Wyrd workspaces you don't need to install it. A system config can't install a Codex plugin for
+each user, so workspaces add the server to `/etc/codex/config.toml` instead, running the plugin's
+script from the marketplace checkout:
 
 ```toml
 [mcp_servers.mnemonic]
@@ -84,8 +90,8 @@ args = ["/usr/local/share/agent-marketplace/plugins/mnemonic/scripts/mnemonic-mc
 env_vars = ["VAULT_ADDR", "NODE_EXTRA_CA_CERTS", "T3CODE_THREAD_ID", "SSH_AUTH_SOCK", "GIT_OPERATOR", "XDG_STATE_HOME"]
 ```
 
-Codex gives an MCP server only `HOME`, `PATH`, `USER` and a few more variables. `env_vars`
-forwards the ones that envconsul, the embedding requests and the git shim need.
+That entry takes the `mnemonic` name before an installed plugin's server does, so installing the
+plugin in a workspace changes nothing.
 
 ## Who commits the notes
 

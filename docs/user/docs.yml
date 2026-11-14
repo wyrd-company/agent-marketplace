@@ -62,6 +62,10 @@ products:
             command: |-
               claude plugin marketplace add wyrd-company/agent-marketplace
               claude plugin install mnemonic@wyrd-company
+          - harness: Codex
+            command: |-
+              codex plugin marketplace add wyrd-company/agent-marketplace
+              codex plugin add mnemonic@wyrd-company
         provides:
           - element: mcp-server
             name: mnemonic

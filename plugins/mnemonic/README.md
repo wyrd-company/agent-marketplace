@@ -27,12 +27,22 @@ runs `scripts/mnemonic-mcp.sh` from the marketplace checkout. Codex passes MCP s
 environment variables, so that entry forwards the ones the git shim needs to commit as the
 thread's operator.
 
-Elsewhere, with the requirements in place:
+Elsewhere, with the requirements in place, Claude Code:
 
 ```bash
 claude plugin marketplace add wyrd-company/agent-marketplace
 claude plugin install mnemonic@wyrd-company
 ```
+
+Codex:
+
+```bash
+codex plugin marketplace add wyrd-company/agent-marketplace
+codex plugin add mnemonic@wyrd-company
+```
+
+In a workspace, the managed `[mcp_servers.mnemonic]` entry takes the name before the plugin's
+server does, so installing the Codex plugin there changes nothing.
 
 ## Provides
 
@@ -42,11 +52,21 @@ claude plugin install mnemonic@wyrd-company
 
 ## Layout
 
+One folder serves both harnesses: each has its own manifest and MCP file, and the script is
+shared.
+
 ```text
 mnemonic/
 ├── .claude-plugin/plugin.json   # Claude Code
-├── .mcp.json                    # the MCP server, started by the script
+├── .mcp.json                    # Claude Code's MCP server
+├── .codex-plugin/plugin.json    # Codex
+├── .codex-mcp.json              # Codex's MCP server, with the forwarded variables
 └── scripts/mnemonic-mcp.sh      # envconsul and the pinned mnemonic package
 ```
+
+Codex doesn't expand `${CLAUDE_PLUGIN_ROOT}` in a plugin's MCP file, so the two harnesses can't
+share one. `.codex-mcp.json` sets `"cwd": "."`, which Codex resolves to the installed plugin's
+root, and runs the script by its relative path. It also lists `env_vars`, which Claude Code
+doesn't need: Claude Code passes its whole environment to the server.
 
 The mnemonic version is pinned in `scripts/mnemonic-mcp.sh`.
