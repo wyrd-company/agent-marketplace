@@ -1,7 +1,7 @@
 {
   "name": "mnemonic",
   "version": "0.1.0",
-  "description": "The mnemonic memory MCP server, with its embedding key read from Vault at start.",
+  "description": "Run the mnemonic memory MCP server, with its embedding key read from Vault at start.",
   "author": {
     "name": "Wyrd Company",
     "url": "https://github.com/wyrd-company"
