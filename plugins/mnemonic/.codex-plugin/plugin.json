@@ -1,0 +1,23 @@
+{
+  "name": "mnemonic",
+  "version": "0.1.0",
+  "description": "Run the mnemonic memory MCP server, with its embedding key read from Vault at start.",
+  "author": {
+    "name": "Wyrd Company",
+    "url": "https://github.com/wyrd-company"
+  },
+  "homepage": "https://wyrd.foo/tools/mnemonic",
+  "repository": "https://github.com/wyrd-company/agent-marketplace",
+  "license": "MIT",
+  "keywords": ["memory", "mcp", "mnemonic", "vault"],
+  "interface": {
+    "displayName": "mnemonic",
+    "shortDescription": "Long-lived memory as markdown notes in git.",
+    "longDescription": "Runs the mnemonic memory MCP server under envconsul, which reads the workspace's Xolotl embedding key from Vault and gives it to the server alone. Requires envconsul and /etc/mnemonic/config.hcl from workspace-ansible.",
+    "developerName": "Wyrd Company",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://wyrd.foo/tools/mnemonic"
+  },
+  "mcpServers": "./.codex-mcp.json"
+}
